@@ -1,0 +1,7 @@
+#!/bin/sh
+start=$(date +%s)
+echo "开始执行 pnpm lint"
+pnpm lint
+end=$(date +%s)
+runtime=$((end-start))
+echo "pnpm lint 执行完成，耗时 $runtime 秒"
