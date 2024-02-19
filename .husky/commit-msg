@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# 提取提交信息的第一行
+msg=$(head -n1 $1)
+
+# 定义提交信息的格式规则
+pattern="^(feat|fix|docs|style|refactor|perf|test|chore|revert|merge|sync)(\(.+\))?: .{1,50}$"
+
+# 检查提交信息是否符合格式规则
+if [[ ! $msg =~ $pattern ]]; then
+  echo "你的 commit 信息不符合格式规则！请按照以下格式进行提交："
+  echo "<type>(<scope>): <subject>"
+  echo "其中，<type> 必须是以下之一：feat, fix, docs, style, refactor, perf, test, chore, revert, merge, sync"
+  echo "<scope> 是可选的，用于说明 commit 影响的范围"
+  echo "<subject> 是 commit 目的的简短描述，不超过50个字符"
+  exit 1
+fi
